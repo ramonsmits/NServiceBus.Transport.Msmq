@@ -232,7 +232,7 @@ namespace NServiceBus.Transport.Msmq
         Func<TransportTransactionMode, ReceiveStrategy> receiveStrategyFactory;
         ConcurrentDictionary<Task, Task> runningReceiveTasks;
 
-        static TimeSpan MessageEnumeratorMoveNextTimeout = TimeSpan.FromMilliseconds(10);
+        static TimeSpan MessageEnumeratorMoveNextTimeout = TimeSpan.FromSeconds(1);
         static ILog Logger = LogManager.GetLogger<MessagePump>();
 
         static MessagePropertyFilter DefaultReadPropertyFilter = new MessagePropertyFilter
