@@ -35,7 +35,7 @@ namespace NServiceBus.Transport.Msmq
             {
                 if (ex.MessageQueueErrorCode == MessageQueueErrorCode.IOTimeout)
                 {
-                    //We should only get an IOTimeout exception here if another process removed the message between us peeking and now.
+                    Logger.Debug("MessageQueueError: IOTimeout. Another process/thread removed the message between us peeking and now.");
                     message = null;
                     return false;
                 }
@@ -55,7 +55,7 @@ namespace NServiceBus.Transport.Msmq
             {
                 if (ex.MessageQueueErrorCode == MessageQueueErrorCode.IOTimeout)
                 {
-                    //We should only get an IOTimeout exception here if another process removed the message between us peeking and now.
+                    Logger.Debug("MessageQueueError: IOTimeout. Another process/thread removed the message between us peeking and now.");
                     message = null;
                     return false;
                 }
