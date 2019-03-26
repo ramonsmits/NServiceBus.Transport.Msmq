@@ -125,7 +125,7 @@ namespace NServiceBus.Transport.Msmq
                     try
                     {
                         //note: .Peek will throw an ex if no message is available. It also turns out that .MoveNext is faster since message isn't read
-                        if (!enumerator.MoveNext(TimeSpan.FromMilliseconds(10)))
+                        if (!enumerator.MoveNext(MessageEnumeratorMoveNextTimeout))
                         {
                             continue;
                         }
@@ -232,6 +232,7 @@ namespace NServiceBus.Transport.Msmq
         Func<TransportTransactionMode, ReceiveStrategy> receiveStrategyFactory;
         ConcurrentDictionary<Task, Task> runningReceiveTasks;
 
+        static TimeSpan MessageEnumeratorMoveNextTimeout = TimeSpan.FromMilliseconds(10);
         static ILog Logger = LogManager.GetLogger<MessagePump>();
 
         static MessagePropertyFilter DefaultReadPropertyFilter = new MessagePropertyFilter
