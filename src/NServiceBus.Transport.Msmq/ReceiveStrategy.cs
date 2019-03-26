@@ -27,7 +27,7 @@ namespace NServiceBus.Transport.Msmq
         {
             try
             {
-                message = inputQueue.Receive(TimeSpan.FromMilliseconds(10), transactionType);
+                message = inputQueue.Receive(ReceiveTimeout, transactionType);
 
                 return true;
             }
@@ -47,7 +47,7 @@ namespace NServiceBus.Transport.Msmq
         {
             try
             {
-                message = inputQueue.Receive(TimeSpan.FromMilliseconds(10), transaction);
+                message = inputQueue.Receive(ReceiveTimeout, transaction);
 
                 return true;
             }
@@ -147,6 +147,7 @@ namespace NServiceBus.Transport.Msmq
         Func<ErrorContext, Task<ErrorHandleResult>> onError;
         CriticalError criticalError;
 
+        static TimeSpan ReceiveTimeout = TimeSpan.FromMilliseconds(10);
         static ILog Logger = LogManager.GetLogger<ReceiveStrategy>();
     }
 }
